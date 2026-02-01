@@ -1,0 +1,121 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "TXD",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[0]",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[1]",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[5]",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[6]",
+					"strict" : false
+				},
+				{
+					"name" : "rdata[7]",
+					"strict" : false
+				},
+				{
+					"name" : "parity_err",
+					"strict" : false
+				},
+				{
+					"name" : "frame_err",
+					"strict" : false
+				},
+				{
+					"name" : "parity_type",
+					"strict" : false
+				},
+				{
+					"name" : "parity_en",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "rst_n",
+					"strict" : false
+				},
+				{
+					"name" : "tlen[0]",
+					"strict" : false
+				},
+				{
+					"name" : "tlen[1]",
+					"strict" : false
+				},
+				{
+					"name" : "RXD",
+					"strict" : false
+				},
+				{
+					"name" : "bclk_mode",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[0]",
+					"strict" : false
+				},
+				{
+					"name" : "wr_en",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[7]",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[6]",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[5]",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[4]",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[3]",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[2]",
+					"strict" : false
+				},
+				{
+					"name" : "wdata[1]",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

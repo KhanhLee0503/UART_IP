@@ -1,0 +1,816 @@
+Analysis & Synthesis report for uart_top
+Sun Feb  1 13:07:10 2026
+Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. State Machine - |uart_top|TSR_reg:Transmitter_Shift_Reg|state
+ 10. State Machine - |uart_top|RSR_reg:Receiver_Shift_Reg|state
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Registers Added for RAM Pass-Through Logic
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for fifo_sync:THR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated
+ 16. Source assignments for fifo_sync:RBR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated
+ 17. Parameter Settings for User Entity Instance: baudtick_gen:baudgen
+ 18. Parameter Settings for User Entity Instance: baudtick_gen:baudgen|counter:counter
+ 19. Parameter Settings for User Entity Instance: baudtick_gen:baudgen|counter:counter_x16
+ 20. Parameter Settings for User Entity Instance: RSR_reg:Receiver_Shift_Reg
+ 21. Parameter Settings for User Entity Instance: fifo_sync:RBR
+ 22. Parameter Settings for User Entity Instance: TSR_reg:Transmitter_Shift_Reg
+ 23. Parameter Settings for User Entity Instance: fifo_sync:THR
+ 24. Parameter Settings for Inferred Entity Instance: fifo_sync:THR|altsyncram:data_reg_rtl_0
+ 25. Parameter Settings for Inferred Entity Instance: fifo_sync:RBR|altsyncram:data_reg_rtl_0
+ 26. altsyncram Parameter Settings by Entity Instance
+ 27. Port Connectivity Checks: "fifo_sync:THR"
+ 28. Port Connectivity Checks: "fifo_sync:RBR"
+ 29. Post-Synthesis Netlist Statistics for Top Partition
+ 30. Elapsed Time Per Partition
+ 31. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, the Altera Quartus Prime License Agreement,
+the Altera IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Altera and sold by Altera or its authorized distributors.  Please
+refer to the Altera Software License Subscription Agreements 
+on the Quartus Prime software download page.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sun Feb  1 13:07:10 2026           ;
+; Quartus Prime Version              ; 25.1std.0 Build 1129 10/21/2025 SC Lite Edition ;
+; Revision Name                      ; uart_top                                        ;
+; Top-level Entity Name              ; uart_top                                        ;
+; Family                             ; MAX 10                                          ;
+; Total logic elements               ; 264                                             ;
+;     Total combinational functions  ; 194                                             ;
+;     Dedicated logic registers      ; 181                                             ;
+; Total registers                    ; 181                                             ;
+; Total pins                         ; 28                                              ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 256                                             ;
+; Embedded Multiplier 9-bit elements ; 0                                               ;
+; Total PLLs                         ; 0                                               ;
+; UFM blocks                         ; 0                                               ;
+; ADC blocks                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 10M50DAF484C7G     ;                    ;
+; Top-level entity name                                            ; uart_top           ; uart_top           ;
+; Family name                                                      ; MAX 10             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 20          ;
+; Maximum allowed            ; 14          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 14          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-14        ;   0.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                     ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                 ; Library ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
+; ../00_src/uart_top.sv            ; yes             ; User SystemVerilog HDL File  ; C:/SystemVerilog/UART/00_src/uart_top.sv                                     ;         ;
+; ../00_src/TSR_reg.sv             ; yes             ; User SystemVerilog HDL File  ; C:/SystemVerilog/UART/00_src/TSR_reg.sv                                      ;         ;
+; ../00_src/RSR_reg.sv             ; yes             ; User SystemVerilog HDL File  ; C:/SystemVerilog/UART/00_src/RSR_reg.sv                                      ;         ;
+; ../00_src/fifo_sync.sv           ; yes             ; User SystemVerilog HDL File  ; C:/SystemVerilog/UART/00_src/fifo_sync.sv                                    ;         ;
+; ../00_src/baudtick_gen.sv        ; yes             ; User SystemVerilog HDL File  ; C:/SystemVerilog/UART/00_src/baudtick_gen.sv                                 ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
+; aglobal251.inc                   ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/aglobal251.inc        ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/altrom.inc            ;         ;
+; altram.inc                       ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/altram.inc            ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera_lite/25.1std/quartus/libraries/megafunctions/altdpram.inc          ;         ;
+; db/altsyncram_jjh1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/SystemVerilog/UART/FPGA/db/altsyncram_jjh1.tdf                            ;         ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 264       ;
+;                                             ;           ;
+; Total combinational functions               ; 194       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 78        ;
+;     -- 3 input functions                    ; 66        ;
+;     -- <=2 input functions                  ; 50        ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 170       ;
+;     -- arithmetic mode                      ; 24        ;
+;                                             ;           ;
+; Total registers                             ; 181       ;
+;     -- Dedicated logic registers            ; 181       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 28        ;
+; Total memory bits                           ; 256       ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 165       ;
+; Total fan-out                               ; 1449      ;
+; Average fan-out                             ; 3.24      ;
++---------------------------------------------+-----------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+----------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                              ; Entity Name     ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+----------------------------------------------------------------------------------+-----------------+--------------+
+; |uart_top                                 ; 194 (0)             ; 181 (10)                  ; 256         ; 0          ; 0            ; 0       ; 0         ; 28   ; 0            ; 0          ; |uart_top                                                                        ; uart_top        ; work         ;
+;    |RSR_reg:Receiver_Shift_Reg|           ; 53 (53)             ; 34 (34)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|RSR_reg:Receiver_Shift_Reg                                             ; RSR_reg         ; work         ;
+;    |TSR_reg:Transmitter_Shift_Reg|        ; 32 (32)             ; 27 (27)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|TSR_reg:Transmitter_Shift_Reg                                          ; TSR_reg         ; work         ;
+;    |baudtick_gen:baudgen|                 ; 39 (7)              ; 22 (2)                    ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|baudtick_gen:baudgen                                                   ; baudtick_gen    ; work         ;
+;       |counter:counter_x16|               ; 14 (14)             ; 8 (8)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|baudtick_gen:baudgen|counter:counter_x16                               ; counter         ; work         ;
+;       |counter:counter|                   ; 18 (18)             ; 12 (12)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|baudtick_gen:baudgen|counter:counter                                   ; counter         ; work         ;
+;    |fifo_sync:RBR|                        ; 35 (35)             ; 44 (44)                   ; 128         ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|fifo_sync:RBR                                                          ; fifo_sync       ; work         ;
+;       |altsyncram:data_reg_rtl_0|         ; 0 (0)               ; 0 (0)                     ; 128         ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|fifo_sync:RBR|altsyncram:data_reg_rtl_0                                ; altsyncram      ; work         ;
+;          |altsyncram_jjh1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 128         ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|fifo_sync:RBR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated ; altsyncram_jjh1 ; work         ;
+;    |fifo_sync:THR|                        ; 35 (35)             ; 44 (44)                   ; 128         ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|fifo_sync:THR                                                          ; fifo_sync       ; work         ;
+;       |altsyncram:data_reg_rtl_0|         ; 0 (0)               ; 0 (0)                     ; 128         ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|fifo_sync:THR|altsyncram:data_reg_rtl_0                                ; altsyncram      ; work         ;
+;          |altsyncram_jjh1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 128         ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |uart_top|fifo_sync:THR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated ; altsyncram_jjh1 ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+----------------------------------------------------------------------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                      ;
++-----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                              ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++-----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; fifo_sync:RBR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 16           ; 8            ; 16           ; 8            ; 128  ; None ;
+; fifo_sync:THR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 16           ; 8            ; 16           ; 8            ; 128  ; None ;
++-----------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
+Encoding Type:  One-Hot
++----------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |uart_top|TSR_reg:Transmitter_Shift_Reg|state                                                              ;
++------------------+------------+--------------+------------+-------------+------------------+------------------+------------+
+; Name             ; state.STOP ; state.PARITY ; state.DATA ; state.START ; state.READ_FIFO2 ; state.READ_FIFO1 ; state.IDLE ;
++------------------+------------+--------------+------------+-------------+------------------+------------------+------------+
+; state.IDLE       ; 0          ; 0            ; 0          ; 0           ; 0                ; 0                ; 0          ;
+; state.READ_FIFO1 ; 0          ; 0            ; 0          ; 0           ; 0                ; 1                ; 1          ;
+; state.READ_FIFO2 ; 0          ; 0            ; 0          ; 0           ; 1                ; 0                ; 1          ;
+; state.START      ; 0          ; 0            ; 0          ; 1           ; 0                ; 0                ; 1          ;
+; state.DATA       ; 0          ; 0            ; 1          ; 0           ; 0                ; 0                ; 1          ;
+; state.PARITY     ; 0          ; 1            ; 0          ; 0           ; 0                ; 0                ; 1          ;
+; state.STOP       ; 1          ; 0            ; 0          ; 0           ; 0                ; 0                ; 1          ;
++------------------+------------+--------------+------------+-------------+------------------+------------------+------------+
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------+
+; State Machine - |uart_top|RSR_reg:Receiver_Shift_Reg|state                                              ;
++------------------+------------------+------------+--------------+------------+-------------+------------+
+; Name             ; state.WRITE_FIFO ; state.STOP ; state.PARITY ; state.DATA ; state.START ; state.IDLE ;
++------------------+------------------+------------+--------------+------------+-------------+------------+
+; state.IDLE       ; 0                ; 0          ; 0            ; 0          ; 0           ; 0          ;
+; state.START      ; 0                ; 0          ; 0            ; 0          ; 1           ; 1          ;
+; state.DATA       ; 0                ; 0          ; 0            ; 1          ; 0           ; 1          ;
+; state.PARITY     ; 0                ; 0          ; 1            ; 0          ; 0           ; 1          ;
+; state.STOP       ; 0                ; 1          ; 0            ; 0          ; 0           ; 1          ;
+; state.WRITE_FIFO ; 1                ; 0          ; 0            ; 0          ; 0           ; 1          ;
++------------------+------------------+------------+--------------+------------+-------------+------------+
+
+
++----------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                 ;
++---------------------------------------+------------------------------------------------------------+
+; Register name                         ; Reason for Removal                                         ;
++---------------------------------------+------------------------------------------------------------+
+; TSR_reg:Transmitter_Shift_Reg|state~4 ; Lost fanout                                                ;
+; TSR_reg:Transmitter_Shift_Reg|state~5 ; Lost fanout                                                ;
+; TSR_reg:Transmitter_Shift_Reg|state~6 ; Lost fanout                                                ;
+; RSR_reg:Receiver_Shift_Reg|state~4    ; Lost fanout                                                ;
+; RSR_reg:Receiver_Shift_Reg|state~5    ; Lost fanout                                                ;
+; RSR_reg:Receiver_Shift_Reg|state~6    ; Lost fanout                                                ;
+; TSR_reg:Transmitter_Shift_Reg|rd_en   ; Merged with TSR_reg:Transmitter_Shift_Reg|state.READ_FIFO1 ;
+; Total Number of Removed Registers = 7 ;                                                            ;
++---------------------------------------+------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 181   ;
+; Number of registers using Synchronous Clear  ; 16    ;
+; Number of registers using Synchronous Load   ; 16    ;
+; Number of registers using Asynchronous Clear ; 123   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 85    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++------------------------------------------------------------------------+
+; Registers Added for RAM Pass-Through Logic                             ;
++-----------------------------------------+------------------------------+
+; Register Name                           ; RAM Name                     ;
++-----------------------------------------+------------------------------+
+; fifo_sync:THR|data_reg_rtl_0_bypass[0]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[1]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[2]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[3]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[4]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[5]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[6]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[7]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[8]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[9]  ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[10] ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[11] ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[12] ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[13] ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[14] ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[15] ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:THR|data_reg_rtl_0_bypass[16] ; fifo_sync:THR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[0]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[1]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[2]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[3]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[4]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[5]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[6]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[7]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[8]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[9]  ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[10] ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[11] ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[12] ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[13] ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[14] ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[15] ; fifo_sync:RBR|data_reg_rtl_0 ;
+; fifo_sync:RBR|data_reg_rtl_0_bypass[16] ; fifo_sync:RBR|data_reg_rtl_0 ;
++-----------------------------------------+------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------+
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |uart_top|TSR_reg:Transmitter_Shift_Reg|tdata_reg[1] ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |uart_top|TSR_reg:Transmitter_Shift_Reg|bit_cnt[0]   ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |uart_top|RSR_reg:Receiver_Shift_Reg|rdata[6]        ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |uart_top|RSR_reg:Receiver_Shift_Reg|sample_cnt[3]   ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |uart_top|RSR_reg:Receiver_Shift_Reg|rdata[2]        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |uart_top|fifo_sync:THR|rdata[4]                     ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; Yes        ; |uart_top|fifo_sync:RBR|rdata[3]                     ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |uart_top|RSR_reg:Receiver_Shift_Reg|bit_cnt[3]      ;
+; 5:1                ; 2 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |uart_top|RSR_reg:Receiver_Shift_Reg|rdata[1]        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------+
+; Source assignments for fifo_sync:THR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------+
+; Assignment                      ; Value              ; From ; To                              ;
++---------------------------------+--------------------+------+---------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                               ;
++---------------------------------+--------------------+------+---------------------------------+
+
+
++-----------------------------------------------------------------------------------------------+
+; Source assignments for fifo_sync:RBR|altsyncram:data_reg_rtl_0|altsyncram_jjh1:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------+
+; Assignment                      ; Value              ; From ; To                              ;
++---------------------------------+--------------------+------+---------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                               ;
++---------------------------------+--------------------+------+---------------------------------+
+
+
++-------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: baudtick_gen:baudgen ;
++----------------+----------+---------------------------------------+
+; Parameter Name ; Value    ; Type                                  ;
++----------------+----------+---------------------------------------+
+; SYS_CLK        ; 27000000 ; Signed Integer                        ;
+; BAUDRATE       ; 9600     ; Signed Integer                        ;
+; MODE           ; 16       ; Signed Integer                        ;
+; DIVISOR        ; 175      ; Signed Integer                        ;
++----------------+----------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: baudtick_gen:baudgen|counter:counter ;
++----------------+-------+----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                     ;
++----------------+-------+----------------------------------------------------------+
+; COUNT_WIDTH    ; 12    ; Signed Integer                                           ;
++----------------+-------+----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: baudtick_gen:baudgen|counter:counter_x16 ;
++----------------+-------+--------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                         ;
++----------------+-------+--------------------------------------------------------------+
+; COUNT_WIDTH    ; 8     ; Signed Integer                                               ;
++----------------+-------+--------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: RSR_reg:Receiver_Shift_Reg ;
++----------------+-------+------------------------------------------------+
+; Parameter Name ; Value ; Type                                           ;
++----------------+-------+------------------------------------------------+
+; IDLE           ; 0     ; Signed Integer                                 ;
+; START          ; 1     ; Signed Integer                                 ;
+; DATA           ; 2     ; Signed Integer                                 ;
+; PARITY         ; 3     ; Signed Integer                                 ;
+; STOP           ; 4     ; Signed Integer                                 ;
+; WRITE_FIFO     ; 5     ; Signed Integer                                 ;
++----------------+-------+------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: fifo_sync:RBR ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; ADDR_WIDTH     ; 4     ; Signed Integer                    ;
+; DATA_WIDTH     ; 8     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: TSR_reg:Transmitter_Shift_Reg ;
++----------------+-------+---------------------------------------------------+
+; Parameter Name ; Value ; Type                                              ;
++----------------+-------+---------------------------------------------------+
+; IDLE           ; 0     ; Signed Integer                                    ;
+; READ_FIFO1     ; 1     ; Signed Integer                                    ;
+; READ_FIFO2     ; 2     ; Signed Integer                                    ;
+; START          ; 3     ; Signed Integer                                    ;
+; DATA           ; 4     ; Signed Integer                                    ;
+; PARITY         ; 5     ; Signed Integer                                    ;
+; STOP           ; 6     ; Signed Integer                                    ;
++----------------+-------+---------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: fifo_sync:THR ;
++----------------+-------+-----------------------------------+
+; Parameter Name ; Value ; Type                              ;
++----------------+-------+-----------------------------------+
+; ADDR_WIDTH     ; 4     ; Signed Integer                    ;
+; DATA_WIDTH     ; 8     ; Signed Integer                    ;
++----------------+-------+-----------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: fifo_sync:THR|altsyncram:data_reg_rtl_0 ;
++------------------------------------+----------------------+------------------------------+
+; Parameter Name                     ; Value                ; Type                         ;
++------------------------------------+----------------------+------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                      ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                   ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                 ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                 ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE               ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                      ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                      ;
+; WIDTH_A                            ; 8                    ; Untyped                      ;
+; WIDTHAD_A                          ; 4                    ; Untyped                      ;
+; NUMWORDS_A                         ; 16                   ; Untyped                      ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                      ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                      ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                      ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                      ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                      ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                      ;
+; WIDTH_B                            ; 8                    ; Untyped                      ;
+; WIDTHAD_B                          ; 4                    ; Untyped                      ;
+; NUMWORDS_B                         ; 16                   ; Untyped                      ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                      ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                      ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                      ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                      ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                      ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                      ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                      ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                      ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                      ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                      ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                      ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                      ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                      ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                      ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                      ;
+; BYTE_SIZE                          ; 8                    ; Untyped                      ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                      ;
+; INIT_FILE                          ; UNUSED               ; Untyped                      ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                      ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                      ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                      ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                      ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                      ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                      ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                      ;
+; DEVICE_FAMILY                      ; MAX 10               ; Untyped                      ;
+; CBXI_PARAMETER                     ; altsyncram_jjh1      ; Untyped                      ;
++------------------------------------+----------------------+------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: fifo_sync:RBR|altsyncram:data_reg_rtl_0 ;
++------------------------------------+----------------------+------------------------------+
+; Parameter Name                     ; Value                ; Type                         ;
++------------------------------------+----------------------+------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                      ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                   ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                 ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                 ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE               ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                      ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                      ;
+; WIDTH_A                            ; 8                    ; Untyped                      ;
+; WIDTHAD_A                          ; 4                    ; Untyped                      ;
+; NUMWORDS_A                         ; 16                   ; Untyped                      ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                      ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                      ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                      ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                      ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                      ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                      ;
+; WIDTH_B                            ; 8                    ; Untyped                      ;
+; WIDTHAD_B                          ; 4                    ; Untyped                      ;
+; NUMWORDS_B                         ; 16                   ; Untyped                      ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                      ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                      ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                      ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                      ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                      ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                      ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                      ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                      ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                      ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                      ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                      ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                      ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped                      ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped                      ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                      ;
+; BYTE_SIZE                          ; 8                    ; Untyped                      ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                      ;
+; INIT_FILE                          ; UNUSED               ; Untyped                      ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                      ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped                      ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                      ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                      ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                      ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                      ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped                      ;
+; DEVICE_FAMILY                      ; MAX 10               ; Untyped                      ;
+; CBXI_PARAMETER                     ; altsyncram_jjh1      ; Untyped                      ;
++------------------------------------+----------------------+------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                    ;
++-------------------------------------------+-----------------------------------------+
+; Name                                      ; Value                                   ;
++-------------------------------------------+-----------------------------------------+
+; Number of entity instances                ; 2                                       ;
+; Entity Instance                           ; fifo_sync:THR|altsyncram:data_reg_rtl_0 ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                               ;
+;     -- WIDTH_A                            ; 8                                       ;
+;     -- NUMWORDS_A                         ; 16                                      ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                            ;
+;     -- WIDTH_B                            ; 8                                       ;
+;     -- NUMWORDS_B                         ; 16                                      ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                  ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                            ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                    ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA                                ;
+; Entity Instance                           ; fifo_sync:RBR|altsyncram:data_reg_rtl_0 ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                               ;
+;     -- WIDTH_A                            ; 8                                       ;
+;     -- NUMWORDS_A                         ; 16                                      ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                            ;
+;     -- WIDTH_B                            ; 8                                       ;
+;     -- NUMWORDS_B                         ; 16                                      ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                  ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                            ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                    ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA                                ;
++-------------------------------------------+-----------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "fifo_sync:THR"                                                                      ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; full ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "fifo_sync:RBR"                                                                       ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                             ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+; empty ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 28                          ;
+; cycloneiii_ff         ; 181                         ;
+;     CLR               ; 54                          ;
+;     ENA               ; 16                          ;
+;     ENA CLR           ; 69                          ;
+;     SCLR SLD          ; 16                          ;
+;     plain             ; 26                          ;
+; cycloneiii_lcell_comb ; 194                         ;
+;     arith             ; 24                          ;
+;         2 data inputs ; 22                          ;
+;         3 data inputs ; 2                           ;
+;     normal            ; 170                         ;
+;         1 data inputs ; 8                           ;
+;         2 data inputs ; 20                          ;
+;         3 data inputs ; 64                          ;
+;         4 data inputs ; 78                          ;
+; cycloneiii_ram_block  ; 16                          ;
+;                       ;                             ;
+; Max LUT depth         ; 4.00                        ;
+; Average LUT depth     ; 1.90                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Processing started: Sun Feb  1 13:07:00 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off uart_top -c uart_top
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 14 of the 14 processors detected
+Info (12021): Found 1 design units, including 1 entities, in source file /systemverilog/uart/00_src/uart_top.sv
+    Info (12023): Found entity 1: uart_top File: C:/SystemVerilog/UART/00_src/uart_top.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /systemverilog/uart/00_src/tsr_reg.sv
+    Info (12023): Found entity 1: TSR_reg File: C:/SystemVerilog/UART/00_src/TSR_reg.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /systemverilog/uart/00_src/trans.sv
+    Info (12023): Found entity 1: trans File: C:/SystemVerilog/UART/00_src/trans.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /systemverilog/uart/00_src/rsr_reg.sv
+    Info (12023): Found entity 1: RSR_reg File: C:/SystemVerilog/UART/00_src/RSR_reg.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file /systemverilog/uart/00_src/fifo_sync.sv
+    Info (12023): Found entity 1: fifo_sync File: C:/SystemVerilog/UART/00_src/fifo_sync.sv Line: 1
+Info (12021): Found 2 design units, including 2 entities, in source file /systemverilog/uart/00_src/baudtick_gen.sv
+    Info (12023): Found entity 1: baudtick_gen File: C:/SystemVerilog/UART/00_src/baudtick_gen.sv Line: 1
+    Info (12023): Found entity 2: counter File: C:/SystemVerilog/UART/00_src/baudtick_gen.sv Line: 64
+Info (12127): Elaborating entity "uart_top" for the top level hierarchy
+Info (12128): Elaborating entity "baudtick_gen" for hierarchy "baudtick_gen:baudgen" File: C:/SystemVerilog/UART/00_src/uart_top.sv Line: 53
+Info (12128): Elaborating entity "counter" for hierarchy "baudtick_gen:baudgen|counter:counter" File: C:/SystemVerilog/UART/00_src/baudtick_gen.sv Line: 27
+Info (12128): Elaborating entity "counter" for hierarchy "baudtick_gen:baudgen|counter:counter_x16" File: C:/SystemVerilog/UART/00_src/baudtick_gen.sv Line: 46
+Info (12128): Elaborating entity "RSR_reg" for hierarchy "RSR_reg:Receiver_Shift_Reg" File: C:/SystemVerilog/UART/00_src/uart_top.sv Line: 74
+Warning (10230): Verilog HDL assignment warning at RSR_reg.sv(83): truncated value with size 32 to match size of target (4) File: C:/SystemVerilog/UART/00_src/RSR_reg.sv Line: 83
+Warning (10230): Verilog HDL assignment warning at RSR_reg.sv(121): truncated value with size 32 to match size of target (4) File: C:/SystemVerilog/UART/00_src/RSR_reg.sv Line: 121
+Info (12128): Elaborating entity "fifo_sync" for hierarchy "fifo_sync:RBR" File: C:/SystemVerilog/UART/00_src/uart_top.sv Line: 110
+Warning (10230): Verilog HDL assignment warning at fifo_sync.sv(29): truncated value with size 32 to match size of target (5) File: C:/SystemVerilog/UART/00_src/fifo_sync.sv Line: 29
+Warning (10230): Verilog HDL assignment warning at fifo_sync.sv(38): truncated value with size 32 to match size of target (5) File: C:/SystemVerilog/UART/00_src/fifo_sync.sv Line: 38
+Warning (10230): Verilog HDL assignment warning at fifo_sync.sv(74): truncated value with size 32 to match size of target (8) File: C:/SystemVerilog/UART/00_src/fifo_sync.sv Line: 74
+Info (12128): Elaborating entity "TSR_reg" for hierarchy "TSR_reg:Transmitter_Shift_Reg" File: C:/SystemVerilog/UART/00_src/uart_top.sv Line: 127
+Warning (10230): Verilog HDL assignment warning at TSR_reg.sv(96): truncated value with size 32 to match size of target (4) File: C:/SystemVerilog/UART/00_src/TSR_reg.sv Line: 96
+Warning (19016): Clock multiplexers are found and protected
+    Warning (19017): Found clock multiplexer RSR_reg:Receiver_Shift_Reg|sample_data File: C:/SystemVerilog/UART/00_src/RSR_reg.sv Line: 34
+Warning (276020): Inferred RAM node "fifo_sync:THR|data_reg_rtl_0" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
+Warning (276020): Inferred RAM node "fifo_sync:RBR|data_reg_rtl_0" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
+Info (19000): Inferred 2 megafunctions from design logic
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "fifo_sync:THR|data_reg_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 8
+        Info (286033): Parameter WIDTHAD_A set to 4
+        Info (286033): Parameter NUMWORDS_A set to 16
+        Info (286033): Parameter WIDTH_B set to 8
+        Info (286033): Parameter WIDTHAD_B set to 4
+        Info (286033): Parameter NUMWORDS_B set to 16
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "fifo_sync:RBR|data_reg_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 8
+        Info (286033): Parameter WIDTHAD_A set to 4
+        Info (286033): Parameter NUMWORDS_A set to 16
+        Info (286033): Parameter WIDTH_B set to 8
+        Info (286033): Parameter WIDTHAD_B set to 4
+        Info (286033): Parameter NUMWORDS_B set to 16
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
+Info (12130): Elaborated megafunction instantiation "fifo_sync:THR|altsyncram:data_reg_rtl_0"
+Info (12133): Instantiated megafunction "fifo_sync:THR|altsyncram:data_reg_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "8"
+    Info (12134): Parameter "WIDTHAD_A" = "4"
+    Info (12134): Parameter "NUMWORDS_A" = "16"
+    Info (12134): Parameter "WIDTH_B" = "8"
+    Info (12134): Parameter "WIDTHAD_B" = "4"
+    Info (12134): Parameter "NUMWORDS_B" = "16"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "READ_DURING_WRITE_MODE_MIXED_PORTS" = "OLD_DATA"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_jjh1.tdf
+    Info (12023): Found entity 1: altsyncram_jjh1 File: C:/SystemVerilog/UART/FPGA/db/altsyncram_jjh1.tdf Line: 28
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 6 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 316 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 17 input pins
+    Info (21059): Implemented 11 output pins
+    Info (21061): Implemented 272 logic cells
+    Info (21064): Implemented 16 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
+    Info: Peak virtual memory: 4908 megabytes
+    Info: Processing ended: Sun Feb  1 13:07:10 2026
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:19
+
+

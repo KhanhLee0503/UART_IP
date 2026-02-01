@@ -1,0 +1,19 @@
+
+State Machine - |uart_top|TSR_reg:Transmitter_Shift_Reg|state
+Name state.STOP state.PARITY state.DATA state.START state.READ_FIFO2 state.READ_FIFO1 state.IDLE 
+state.IDLE 0 0 0 0 0 0 0 
+state.READ_FIFO1 0 0 0 0 0 1 1 
+state.READ_FIFO2 0 0 0 0 1 0 1 
+state.START 0 0 0 1 0 0 1 
+state.DATA 0 0 1 0 0 0 1 
+state.PARITY 0 1 0 0 0 0 1 
+state.STOP 1 0 0 0 0 0 1 
+
+State Machine - |uart_top|RSR_reg:Receiver_Shift_Reg|state
+Name state.WRITE_FIFO state.STOP state.PARITY state.DATA state.START state.IDLE 
+state.IDLE 0 0 0 0 0 0 
+state.START 0 0 0 0 1 1 
+state.DATA 0 0 0 1 0 1 
+state.PARITY 0 0 1 0 0 1 
+state.STOP 0 1 0 0 0 1 
+state.WRITE_FIFO 1 0 0 0 0 1 

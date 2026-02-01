@@ -1,0 +1,50 @@
+# Copyright (C) 2025  Altera Corporation. All rights reserved.
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, the Altera Quartus Prime License Agreement,
+# the Altera IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Altera and sold by Altera or its authorized distributors.  Please
+# refer to the Altera Software License Subscription Agreements 
+# on the Quartus Prime software download page.
+
+# Quartus Prime Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+# File: C:\SystemVerilog\UART\FPGA\uart_top.csv
+# Generated on: Thu Jan 29 21:55:41 2026
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Strict Preservation
+RXD,Input,PIN_V7,3,B3_N0,PIN_V7,2.5 V,,,,,
+TXD,Output,PIN_W6,3,B3_N0,PIN_W6,2.5 V,,,,,
+bclk_mode,Input,PIN_V8,3,B3_N0,PIN_V8,2.5 V,,,,,
+clk,Input,PIN_P11,3,B3_N0,PIN_P11,2.5 V,,,,,
+frame_err,Output,PIN_A9,7,B7_N0,PIN_A9,2.5 V,,,,,
+parity_en,Input,PIN_V9,3,B3_N0,PIN_V9,2.5 V,,,,,
+parity_err,Output,PIN_A8,7,B7_N0,PIN_A8,2.5 V,,,,,
+parity_type,Input,PIN_V10,3,B3_N0,PIN_V10,2.5 V,,,,,
+rdata[7],Output,PIN_D15,7,B7_N0,PIN_D15,2.5 V,,,,,
+rdata[6],Output,PIN_C17,7,B7_N0,PIN_C17,2.5 V,,,,,
+rdata[5],Output,PIN_D17,7,B7_N0,PIN_D17,2.5 V,,,,,
+rdata[4],Output,PIN_E16,7,B7_N0,PIN_E16,2.5 V,,,,,
+rdata[3],Output,PIN_C16,7,B7_N0,PIN_C16,2.5 V,,,,,
+rdata[2],Output,PIN_C15,7,B7_N0,PIN_C15,2.5 V,,,,,
+rdata[1],Output,PIN_E15,7,B7_N0,PIN_E15,2.5 V,,,,,
+rdata[0],Output,PIN_C14,7,B7_N0,PIN_C14,2.5 V,,,,,
+rst_n,Input,PIN_A7,7,B7_N0,PIN_A7,2.5 V,,,,,
+tlen[1],Input,PIN_F15,7,B7_N0,PIN_F15,2.5 V,,,,,
+tlen[0],Input,PIN_B14,7,B7_N0,PIN_B14,2.5 V,,,,,
+wdata[7],Input,PIN_A14,7,B7_N0,PIN_A14,2.5 V,,,,,
+wdata[6],Input,PIN_A13,7,B7_N0,PIN_A13,2.5 V,,,,,
+wdata[5],Input,PIN_B12,7,B7_N0,PIN_B12,2.5 V,,,,,
+wdata[4],Input,PIN_A12,7,B7_N0,PIN_A12,2.5 V,,,,,
+wdata[3],Input,PIN_C12,7,B7_N0,PIN_C12,2.5 V,,,,,
+wdata[2],Input,PIN_D12,7,B7_N0,PIN_D12,2.5 V,,,,,
+wdata[1],Input,PIN_C11,7,B7_N0,PIN_C11,2.5 V,,,,,
+wdata[0],Input,PIN_C10,7,B7_N0,PIN_C10,2.5 V,,,,,
+wr_en,Input,PIN_B8,7,B7_N0,PIN_B8,2.5 V,,,,,
