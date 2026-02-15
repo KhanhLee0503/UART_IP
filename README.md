@@ -1,6 +1,9 @@
 # UART_IP
 This is a personal project designing an UART Module and implementing it on DE-10 Lite FPGA
 # Overview of the Design
+## TSR Interface
+<img width="1000" height="283" alt="image" src="https://github.com/user-attachments/assets/ca604850-c894-4999-a9a2-291f6cd02a07" />
+
 # Block Diagram
 ## TSR Logic
 <img width="1000" height="733" alt="image" src="https://github.com/user-attachments/assets/eafd2545-58c7-4610-9b73-5965f836efe4" />
