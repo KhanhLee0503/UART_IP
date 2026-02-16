@@ -21,3 +21,14 @@ This is a personal project designing an UART Module and implementing it on DE-10
 ## RSR Logic
 ### Read Data Register
 <img width="1000" height="536" alt="image" src="https://github.com/user-attachments/assets/466e2ec0-4d3c-470c-9db5-8d1b2da0bcff" />
+
+### Sample Counter
+<img width="1000" height="609" alt="image" src="https://github.com/user-attachments/assets/322e53bf-242d-4f9b-8ffd-21f21d45e068" />
+
+### Sample Logic
+<img width="1000" height="773" alt="image" src="https://github.com/user-attachments/assets/c8303fa2-d9fc-4d9f-b8f3-c37f18a6a6c7" />
+<img width="1000" height="226" alt="image" src="https://github.com/user-attachments/assets/32adc4e7-1874-443d-b7bb-ddb98eec64d9" />
+
+
+### Parity Logic
+<img width="1000" height="655" alt="image" src="https://github.com/user-attachments/assets/c5d705c2-29c3-4335-b140-bb56dc1adac9" />
