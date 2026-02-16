@@ -17,3 +17,7 @@ This is a personal project designing an UART Module and implementing it on DE-10
 ### Transmit Logic 
 <img width="1000" height="449" alt="image" src="https://github.com/user-attachments/assets/005b917d-c515-418b-a6ca-3cfa98071b48" />
 <img width="1000" height="462" alt="image" src="https://github.com/user-attachments/assets/eb340d11-2d75-4c3a-b8c2-74b055d490d1" />
+
+## RSR Logic
+### Read Data Register
+<img width="1000" height="536" alt="image" src="https://github.com/user-attachments/assets/466e2ec0-4d3c-470c-9db5-8d1b2da0bcff" />
