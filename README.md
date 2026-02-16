@@ -29,6 +29,8 @@ This is a personal project designing an UART Module and implementing it on DE-10
 <img width="1000" height="773" alt="image" src="https://github.com/user-attachments/assets/c8303fa2-d9fc-4d9f-b8f3-c37f18a6a6c7" />
 <img width="1000" height="226" alt="image" src="https://github.com/user-attachments/assets/32adc4e7-1874-443d-b7bb-ddb98eec64d9" />
 
-
 ### Parity Logic
 <img width="1000" height="655" alt="image" src="https://github.com/user-attachments/assets/c5d705c2-29c3-4335-b140-bb56dc1adac9" />
+
+### FSM Diagram
+<img width="1814" height="1057" alt="image" src="https://github.com/user-attachments/assets/cb4d99ea-b24d-4f4a-b799-517fb872fc68" />
