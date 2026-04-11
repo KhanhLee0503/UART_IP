@@ -1,77 +1,74 @@
-module fifo_sync #(
-    parameter ADDR_WIDTH = 4,
-    parameter DATA_WIDTH = 8                
-                   )
+module FIFO_SYNC #(
+    parameter PARA_FIFO_DEPTH = 16,
+    parameter PARA_DATA_WIDTH = 8                
+)
 (
-    input wire clk,
-    input wire rst_n,
-    input wire wr_en,
-    input wire rd_en,
-    input wire [DATA_WIDTH-1:0] wdata,
+    input I_CLK,
+    input I_RESET_N,
+    input I_WR_EN,
+    input I_RD_EN,
+    input [PARA_DATA_WIDTH-1:0] I_FIFO_WDATA,
 
-    output reg [DATA_WIDTH-1:0] rdata,
-    output reg full,
-    output reg empty 
+    output logic [PARA_DATA_WIDTH-1:0] O_FIFO_RDATA,
+    output logic O_FIFO_FULL,
+    output logic O_FIFO_EMPTY 
 ); 
-wire wr_en_sync;
-reg [DATA_WIDTH-1:0] data_reg [0:15];
-reg fifo_full;
-reg fifo_empty;
-reg [ADDR_WIDTH:0] wpointer_reg;
-reg [ADDR_WIDTH:0] rpointer_reg;
 
-//----------------Write Pointer-----------
+localparam PARA_ADDR_WIDTH = $clog2(PARA_FIFO_DEPTH);
 
-always@(posedge clk or negedge rst_n) begin
-    if(!rst_n)
-        wpointer_reg <= {ADDR_WIDTH{1'b0}};        
-    else if(~fifo_full & wr_en)
-        wpointer_reg <= wpointer_reg + 1;
+//==============================================
+//----------------Logic Declaration-------------
+//==============================================
+logic [PARA_DATA_WIDTH-1:0] mem [0:PARA_FIFO_DEPTH-1];
+logic [PARA_ADDR_WIDTH:0] wpointer_reg;
+logic [PARA_ADDR_WIDTH:0] rpointer_reg;
+
+//======================================
+//----------------MEM Array-------------
+//======================================
+always_ff@(posedge I_CLK) begin
+    if(I_WR_EN && !O_FIFO_FULL)
+      // mem[wpointer_reg[PARA_ADDR_WIDTH-1:0]] <= I_FIFO_WDATA;
+		//====================================
+	   // This line is for FPGA test only
+	   // You should use the line above
+	   //====================================
+		 mem[0] <= I_FIFO_WDATA;
 end
 
-//-----------------Read Pointer---------------
-
-always@(posedge clk or negedge rst_n) begin
-    if(!rst_n)
-        rpointer_reg <= {ADDR_WIDTH{1'b0}};        
-    else if(~fifo_empty & rd_en)
-        rpointer_reg <= rpointer_reg + 1;
+//==========================================
+//----------------Write Pointer-------------
+//==========================================
+always_ff@(posedge I_CLK or negedge I_RESET_N) begin
+    if(!I_RESET_N)
+        wpointer_reg <= '0;       
+    else if(!O_FIFO_FULL && I_WR_EN)
+        wpointer_reg <= wpointer_reg + 'h1;
 end
 
-always@(*) begin
-    fifo_empty = (wpointer_reg == rpointer_reg);
+//===========================================
+//-----------------Read Pointer--------------
+//===========================================
+always_ff@(posedge I_CLK or negedge I_RESET_N) begin
+    if(!I_RESET_N)
+        rpointer_reg <= '0;        
+    else if(!O_FIFO_EMPTY && I_RD_EN)
+        rpointer_reg <= rpointer_reg + 'h1;
 end
 
-always@(*) begin
-    fifo_full = ({~wpointer_reg[ADDR_WIDTH], wpointer_reg[ADDR_WIDTH-1:0]} == rpointer_reg[ADDR_WIDTH:0]);
+//===========================================
+//-----------------Status Logic--------------
+//===========================================
+always_comb begin
+    O_FIFO_EMPTY = ~(wpointer_reg[PARA_ADDR_WIDTH] ^ rpointer_reg[PARA_ADDR_WIDTH]) & (wpointer_reg[PARA_ADDR_WIDTH-1:0] == rpointer_reg[PARA_ADDR_WIDTH-1:0]);
+    O_FIFO_FULL = (wpointer_reg[PARA_ADDR_WIDTH] ^ rpointer_reg[PARA_ADDR_WIDTH]) & (wpointer_reg[PARA_ADDR_WIDTH-1:0] == rpointer_reg[PARA_ADDR_WIDTH-1:0]);
+    //O_FIFO_RDATA = mem[rpointer_reg[PARA_ADDR_WIDTH-1:0]];
+	 
+	 //====================================
+	 // This line is for FPGA test only
+	 // You should use the line above
+	 //====================================
+	 O_FIFO_RDATA = mem[0];
 end
 
-always@(*) begin
-    full = fifo_full;
-    empty = fifo_empty;
-end
-
-//----------------FIFO Memory----------------
-assign wr_en_sync = (~fifo_full & wr_en);// | (fifo_full & rd_en & wr_en);
-//Write Data Logic
-always @(posedge clk) begin
-  /* if(!rst_n) begin
-    for(integer i = 0; i < 16; i=i+1) begin
-        data_reg[i] <= {DATA_WIDTH{1'b0}};
-    end
-   end
-   */
-	if(wr_en_sync) begin
-        data_reg[wpointer_reg[ADDR_WIDTH-1:0]] <= wdata; 
-   end
-end
-
-//Read Data Logic 
-always@(posedge clk) begin
-    if(rd_en & ~fifo_empty)
-        rdata <= data_reg[rpointer_reg[ADDR_WIDTH-1:0]];
-    else
-        rdata <= 32'd0;
-end
-
-endmodule
+endmodule: FIFO_SYNC

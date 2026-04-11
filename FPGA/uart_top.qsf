@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "MAX 10"
 set_global_assignment -name DEVICE 10M50DAF484C7G
-set_global_assignment -name TOP_LEVEL_ENTITY uart_top
+set_global_assignment -name TOP_LEVEL_ENTITY UART_TOP
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 25.1STD.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "19:31:05  JANUARY 29, 2026"
 set_global_assignment -name LAST_QUARTUS_VERSION "25.1std.0 Lite Edition"
@@ -54,43 +54,63 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
-set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/uart_top.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/TSR_reg.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/trans.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/RSR_reg.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/fifo_sync.sv
-set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/baudtick_gen.sv
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/UART_TOP.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/TRANS_SHIFT_REG.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/RECEIVER_SHIFT_REG.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/HEX_7_SEG.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/FIFO_SYNC.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../00_src/BAUD_GEN.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_B8 -to wr_en
-set_location_assignment PIN_A7 -to rst_n
-set_location_assignment PIN_C10 -to wdata[0]
-set_location_assignment PIN_C11 -to wdata[1]
-set_location_assignment PIN_D12 -to wdata[2]
-set_location_assignment PIN_C12 -to wdata[3]
-set_location_assignment PIN_A12 -to wdata[4]
-set_location_assignment PIN_B12 -to wdata[5]
-set_location_assignment PIN_A13 -to wdata[6]
-set_location_assignment PIN_A14 -to wdata[7]
-set_location_assignment PIN_C14 -to rdata[0]
-set_location_assignment PIN_E15 -to rdata[1]
-set_location_assignment PIN_C15 -to rdata[2]
-set_location_assignment PIN_C16 -to rdata[3]
-set_location_assignment PIN_E16 -to rdata[4]
-set_location_assignment PIN_D17 -to rdata[5]
-set_location_assignment PIN_C17 -to rdata[6]
-set_location_assignment PIN_D15 -to rdata[7]
-set_location_assignment PIN_B14 -to tlen[0]
-set_location_assignment PIN_F15 -to tlen[1]
-set_location_assignment PIN_P11 -to clk
-set_location_assignment PIN_V10 -to parity_type
-set_location_assignment PIN_V9 -to parity_en
-set_location_assignment PIN_V8 -to bclk_mode
-set_location_assignment PIN_V7 -to RXD
-set_location_assignment PIN_A8 -to parity_err
-set_location_assignment PIN_A9 -to frame_err
-set_location_assignment PIN_W6 -to TXD
+set_location_assignment PIN_P11 -to I_CLK
+set_location_assignment PIN_V10 -to I_RESET_N
+set_location_assignment PIN_C10 -to I_WDATA[0]
+set_location_assignment PIN_C11 -to I_WDATA[1]
+set_location_assignment PIN_D12 -to I_WDATA[2]
+set_location_assignment PIN_C12 -to I_WDATA[3]
+set_location_assignment PIN_A12 -to I_WDATA[4]
+set_location_assignment PIN_B12 -to I_WDATA[5]
+set_location_assignment PIN_A13 -to I_WDATA[6]
+set_location_assignment PIN_A14 -to I_WDATA[7]
+set_location_assignment PIN_C14 -to O_RDATA[0]
+set_location_assignment PIN_E15 -to O_RDATA[1]
+set_location_assignment PIN_C15 -to O_RDATA[2]
+set_location_assignment PIN_C16 -to O_RDATA[3]
+set_location_assignment PIN_E16 -to O_RDATA[4]
+set_location_assignment PIN_D17 -to O_RDATA[5]
+set_location_assignment PIN_C17 -to O_RDATA[6]
+set_location_assignment PIN_D15 -to O_RDATA[7]
+set_location_assignment PIN_C18 -to O_RDATA[8]
+set_location_assignment PIN_D18 -to O_RDATA[9]
+set_location_assignment PIN_E18 -to O_RDATA[10]
+set_location_assignment PIN_B16 -to O_RDATA[11]
+set_location_assignment PIN_A17 -to O_RDATA[12]
+set_location_assignment PIN_A18 -to O_RDATA[13]
+set_location_assignment PIN_B17 -to O_RDATA[14]
+set_location_assignment PIN_A16 -to O_RDATA[15]
+set_location_assignment PIN_B14 -to I_CNT_LOAD
+set_location_assignment PIN_B8 -to I_WR_EN
+set_location_assignment PIN_F15 -to I_CNT_EN
+set_instance_assignment -name IO_STANDARD "2.5 V SCHMITT TRIGGER" -to I_WR_EN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to I_RESET_N
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[15]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[14]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[13]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[12]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[11]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[0]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[3]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[10]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[7]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[9]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[8]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[6]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[2]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[5]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[4]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA[1]
+set_instance_assignment -name IO_STANDARD "2.5 V" -to O_RDATA
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

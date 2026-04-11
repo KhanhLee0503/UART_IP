@@ -1,144 +1,114 @@
-module uart_top(
-    input wire clk,
-    input wire rst_n,
-    input wire bclk_mode,   //0: x16 speed | 1: x13 speed
+module UART_TOP(
+    input I_CLK,
+    input I_RESET_N,
+
+    //input [3:0] I_BAUD_RATE,
+    //input I_BCLK_MODE,  
+    input I_CNT_EN,   
+    input I_CNT_LOAD,   
+
+    input I_WR_EN,       
+    //input I_RD_EN,       
+    input [7:0] I_WDATA,
+    //input I_RX_IN,
     
-    input wire [1:0] tlen,  // 00: 5bit | 01: 6bit | 10: 7bit | 11: 8bit
-    input wire parity_en,
-    input wire parity_type, //0-even, 1-odd
-    
-    input wire wr_en,       // Write 1 to this signal to start Transmission
-        
-    input wire [7:0] wdata,
-    input wire RXD,
-    
-    output wire TXD,
-    output reg [7:0] rdata,
-    output wire parity_err,
-    output wire frame_err
+    //output logic O_TX_OUT,
+    output logic [15:0] O_RDATA
 );
 
-//***Baudrate Signals***
-wire btick;
-wire btick_16;
+logic [7:0] rdata_out;
+logic bclk;
+logic rsr_fifo_nfull;
+logic rsr_write;
+logic [7:0] rsr_data;
 
-//***Full and Empty signals of FIFOs***
-wire full_thr;
-wire empty_thr;
+logic tsr_fifo_nempty;
+logic tsr_read;
+logic [7:0] tsr_data;
 
-wire full_rbr;
-wire empty_rbr;
-
-//***Write and Read Enable signals of RBR***
-wire wr_en_rbr;
-reg rd_en_rbr;
-reg rdata_en;
-wire [7:0] wdata_rbr;
-wire [7:0] rdata_pre;
-
-//***Write and Read Enable signals of THR***
-wire rd_en_thr;
-wire wr_en_thr;
-wire [7:0] rdata_thr;
-
-
-//-------------------------------Sub modules Connections---------------------------
-
-baudtick_gen baudgen ( 
-    .clk(clk),
-    .rst_n(rst_n),
-    .bclk_mode(bclk_mode),
-    .btick(btick),
-    .btick_16(btick_16)
-);
-
-RSR_reg Receiver_Shift_Reg (  
-    .clk(clk),
-    .rst_n(rst_n),
-    .btick_16(btick_16),
-    .btick(btick),
-    
-    .tlen(tlen),
-    .parity_en(parity_en),
-    .parity_type(parity_type), //0-even, 1-odd
-    .sample_type(bclk_mode),
-    
-    .rx_in(RXD),
-    .fifo_nfull(full_rbr),
-
-    .wr_en(wr_en_rbr),
-    .rdata(wdata_rbr),
-    
-    .frame_err(frame_err),
-    .parity_err(parity_err)
-);
-
-always@(posedge clk or negedge rst_n) begin
-    if(!rst_n)
-        rd_en_rbr <= 0;
-    else
-        rd_en_rbr <= wr_en_rbr;    
+//=================================================================
+// This declaration and logic are for baudrate generation test only
+//=================================================================
+//logic [15:0] counter;
+logic rx_in;
+/*
+always_ff@(posedge I_CLK or negedge I_RESET_N) begin
+	if(!I_RESET_N)
+		counter <= '0;
+	else
+		counter <= counter + 1;
 end
 
-always@(posedge clk or negedge rst_n) begin
-    if(!rst_n)
-        rdata_en <= 0;
-    else
-        rdata_en <= rd_en_rbr;    
+always_ff@(posedge I_CLK or negedge I_RESET_N) begin
+	if(!I_RESET_N)
+		rdata_out <= '0;
+	else if (bclk && (&counter))
+		rdata_out <= rdata_out + 1;
 end
+*/
 
-always @(posedge clk or negedge rst_n) begin
-    if(!rst_n)
-        rdata <= 8'b0;
-    else if (rdata_en)
-        rdata <= rdata_pre;
-end
-
-fifo_sync RBR (
-    .clk(clk),
-    .rst_n(rst_n),
-    
-    .wr_en(wr_en_rbr),
-    .rd_en(rd_en_rbr),
-    
-    .wdata(wdata_rbr),
-
-    .rdata(rdata_pre),
-    
-    .full(full_rbr),
-    .empty(empty_rbr) 
+BAUD_GEN baud_gen(
+    .I_CLK(I_CLK),
+    .I_RESET_N(1'b1),
+    .I_BAUD_RATE(4'b0000),
+    .I_BCLK_MODE(1'b0),
+    .I_CNT_EN(I_CNT_EN),
+    .I_CNT_LOAD(I_CNT_LOAD),
+    .O_BCLK(bclk)
 );
 
-
-TSR_reg Transmitter_Shift_Reg (
-    .clk(clk),
-    .rst_n(rst_n),
-    .btick(btick),
-    
-    .tlen(tlen),
-    .parity_en(parity_en),
-    .parity_type(parity_type), //0-even, 1-odd
-    .fifo_nempty(empty_thr),
-    
-    .rd_en(rd_en_thr),
-    .tdata(rdata_thr),
-
-    .tx_out(TXD)
+RECEIVER_SHIFT_REG receiver_shift_reg(
+    .I_CLK(I_CLK),
+    .I_RESET_N(I_RESET_N),
+    .I_BCLK(bclk),
+    .I_FIFO_NFULL(~rsr_fifo_nfull),
+    .I_RX_IN(/*I_RX_IN*/ rx_in),
+    .O_FIFO_WRITE(rsr_write),
+    .O_RDATA(rsr_data)
 );
 
-fifo_sync THR (
-    .clk(clk),
-    .rst_n(rst_n),
+FIFO_SYNC fifo_sync_rsr(
+    .I_CLK(I_CLK),
+    .I_RESET_N(I_RESET_N),
+    .I_WR_EN(rsr_write),
+    .I_RD_EN(/*I_RD_EN*/ 1'b0),
+    .I_FIFO_WDATA(rsr_data),
 
-    .wr_en(wr_en),
-    .rd_en(rd_en_thr),
+    .O_FIFO_RDATA(rdata_out),
+    .O_FIFO_FULL(rsr_fifo_nfull),
+    .O_FIFO_EMPTY()
+);
 
-    .wdata(wdata),
+TRANS_SHIFT_REG trans_shift_reg(
+    .I_CLK(I_CLK),
+    .I_BCLK(bclk),
+    .I_RESET_N(I_RESET_N),
+    .I_TDATA(tsr_data),
+    .I_FIFO_NEMPTY(~tsr_fifo_nempty),
+    .O_FIFO_READ(tsr_read),
+    .O_TX_OUT(/*O_TX_OUT*/rx_in)
+);
 
-    .rdata(rdata_thr),
+FIFO_SYNC fifo_sync_tsr(
+    .I_CLK(I_CLK),
+    .I_RESET_N(I_RESET_N),
+    .I_WR_EN(~I_WR_EN),
+    .I_RD_EN(tsr_read),
+    .I_FIFO_WDATA(I_WDATA),
 
-    .full(full_thr),
-    .empty(empty_thr) 
-);  
+    .O_FIFO_RDATA(tsr_data),
+    .O_FIFO_FULL(),
+    .O_FIFO_EMPTY(tsr_fifo_nempty)
+);
 
-endmodule
+HEX_7_SEG MSB(
+    .I_HEX_IN(rdata_out[7:4]),
+    .SEG_OUT(O_RDATA[15:8])
+);
+
+HEX_7_SEG LSB(
+    .I_HEX_IN(rdata_out[3:0]),
+    .SEG_OUT(O_RDATA[7:0])
+);
+
+endmodule: UART_TOP

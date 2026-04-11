@@ -1,0 +1,4 @@
+Warning (10273): Verilog HDL warning at TRANS_SHIFT_REG.sv(92): extended using "x" or "z" File: C:/SystemVerilog/UART/00_src/TRANS_SHIFT_REG.sv Line: 92
+Warning (10273): Verilog HDL warning at RECEIVER_SHIFT_REG.sv(136): extended using "x" or "z" File: C:/SystemVerilog/UART/00_src/RECEIVER_SHIFT_REG.sv Line: 136
+Warning (10273): Verilog HDL warning at BAUD_GEN.sv(37): extended using "x" or "z" File: C:/SystemVerilog/UART/00_src/BAUD_GEN.sv Line: 37
+Warning (10273): Verilog HDL warning at BAUD_GEN.sv(50): extended using "x" or "z" File: C:/SystemVerilog/UART/00_src/BAUD_GEN.sv Line: 50

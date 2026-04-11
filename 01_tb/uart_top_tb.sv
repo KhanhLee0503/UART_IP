@@ -1,174 +1,86 @@
-`timescale 1ns/1ns
-module uart_top_tb();
-reg clk;
-reg rst_n;
-reg wr_en;
-reg [1:0] tlen;  // 00: 5bit | 01: 6bit | 10: 7bit | 11: 8bit
-reg parity_en;
-reg parity_type; //0-even, 1-odd
-reg bclk_mode;   //0: x16 speed | 1: x13 speed
-reg [7:0] wdata;
-reg RXD;
-wire [7:0] rdata;
-wire TXD;
-wire parity_err;
-wire frame_err;
+module UART_TOP_tb;
+logic I_CLK;
+logic I_RESET_N;
+logic I_BCLK_MODE;
+logic [3:0] I_BAUD_RATE;
+logic I_CNT_EN;
+logic I_CNT_LOAD;
+logic I_WR_EN;
+logic I_RD_EN;
+logic [7:0] I_WDATA;
+logic I_RX_IN;
+logic O_TX_OUT;
+logic [15:0] O_RDATA;
 
+UART_TOP DUT(.*);
 
-uart_top DUT(.*);
-
-reg [9:0] trans_data;
-
-always@(*) begin
-    RXD = TXD;
+//============================
+// Clock Generation
+//===========================
+initial begin
+  I_CLK = 0;
+  forever begin
+    #10 I_CLK = ~I_CLK;
+  end
 end
 
 initial begin
-    clk = 0;
-    forever begin
-        #18.5 clk = ~clk;
+  I_RX_IN   = 1'b1; // Idle state for UART
+  I_WDATA    = 8'h00;
+  I_BCLK_MODE = 1'b0;
+  I_BAUD_RATE = 4'h0; // Example baud rate value
+  I_CNT_EN    = 1'b0;
+  I_CNT_LOAD  = 1'b0;
+  I_WR_EN     = 1'b0;
+  I_RD_EN     = 1'b0;
+  I_RESET_N = 1'b0;
+  #20; 
+  I_RESET_N = 1'b1;
+
+  load_baud_rate(1'b0, 4'h0); // Load baud rate for 9600
+  //#100;
+  //load_data(8'hA5); // Load data to be transmitte
+  #100;
+  send_byte(8'hA5); // Simulate receiving a byte
+end
+
+task automatic load_baud_rate(input mode, input [3:0] baud_rate);
+  begin
+    I_BAUD_RATE = baud_rate; // Set baud rate
+    I_BCLK_MODE = mode;
+    I_CNT_EN = 1'b1;
+    #20; // Wait for one clock cycle
+    I_CNT_LOAD = 1'b1;
+    #20;
+    I_CNT_LOAD = 1'b0;
+  end
+endtask
+
+task automatic load_data(input [7:0] data);
+  begin
+    I_WDATA = data;
+    I_WR_EN = 1'b1;
+    #20; // Wait for one clock cycle
+    I_WR_EN = 1'b0;
+  end
+endtask
+
+task automatic send_byte(input [7:0] data);
+  begin
+    // Start bit
+    I_RX_IN = 1'b0;
+    #104167; // Wait for one bit duration (assuming 9600 baud rate)
+
+    // Data bits (LSB first)
+    for (int i = 0; i < 8; i++) begin
+      I_RX_IN = data[i];
+      #104167; // Wait for one bit duration
     end
-end
 
-always @(posedge TXD or negedge TXD) begin
-    trans_data <= {trans_data[8:0], TXD};
-end
+    // Stop bit
+    I_RX_IN = 1'b1;
+    #104167; // Wait for one bit duration
+  end
+endtask
 
-
-initial begin
-    trans_data = 0;
-    wr_en = 0;
-    tlen = 2'b00;
-    parity_en = 0;
-    parity_type = 0;
-    bclk_mode = 0;
-    wdata = 8'd0;
-    rst_n = 1'b0;
-    #30;
-    rst_n = 1'b1;
-    RXD = 1;
-    @(posedge clk);
-    #1
-
-
-
-    $display(" ");
-    $display("-------------------ITEM1:Transfering and Receiving a random character from itself !! (8bit, no parity) ------------------");
-    tlen = 2'b11;   //8bit
-    bclk_mode = 0;  //x16
-    wdata = 8'heb;
-    wr_en = 1;
-    $display("Transmitting Byte: %h", wdata);
-    $display("Transmitting Start");
-    @(posedge clk);
-    #1;
-    @(rdata);
-    if(rdata == wdata)
-        $display("PASSED: Transmission Completed: %h", rdata);   
-    else
-        $display("==> FAILED | Data Mismatch! Received Data: %h, Expected Data: %h", rdata, wdata);
-
-
-    $display(" ");
-    $display("-------------------ITEM2: Transfering and Receiving a random character from itself !! (7bit, no parity) ------------------");
-    tlen = 2'b10;   //7bit
-    bclk_mode = 0;  //x16
-    wdata = 8'heb;
-    wr_en = 1;
-    $display("Transmitting Byte: %h", wdata);
-    $display("Transmitting Start");
-    @(posedge clk);
-    #1;
-    @(rdata);
-    if(rdata == {1'b0,wdata[6:0]})
-        $display("PASSED: Transmission Completed: %h", rdata);   
-    else
-        $display("==> FAILED | Data Mismatch! Received Data: %h, Expected Data: %h", rdata, {1'b0,wdata[6:0]});
-
-
-    $display(" ");
-    $display("-------------------ITEM3: Transfering and Receiving a random character from itself !! (6bit, no parity) ------------------");
-    tlen = 2'b01;   //6bit
-    bclk_mode = 0;  //x16
-    wdata = 8'heb;
-    wr_en = 1;
-    $display("Transmitting Byte: %h", wdata);
-    $display("Transmitting Start");
-    @(posedge clk);
-    #1;
-    @(rdata);
-    if(rdata == {2'b0,wdata[5:0]})
-        $display("PASSED: Transmission Completed: %h", rdata);   
-    else
-        $display("==> FAILED | Data Mismatch! Received Data: %h, Expected Data: %h", rdata, {2'b0,wdata[5:0]});
-  
-  
-    $display(" ");
-    $display("-------------------ITEM4: Transfering and Receiving a random character from itself !! (5bit, no parity) ------------------");
-    tlen = 2'b00;   //5bit
-    bclk_mode = 0;  //x16
-    wdata = 8'heb;
-    wr_en = 1;
-    $display("Transmitting Byte: %h", wdata);
-    $display("Transmitting Start");
-    @(posedge clk);
-    #1;
-    @(rdata);
-    if(rdata == {3'b0,wdata[4:0]})
-        $display("PASSED: Transmission Completed: %h", rdata);   
-    else
-        $display("==> FAILED | Data Mismatch! Received Data: %h, Expected Data: %h", rdata, {3'b0,wdata[4:0]});
-
-
-    $display(" ");
-    $display("-------------------ITEM6:Transfering and Receiving a random character from itself !! (8bit, with parity) ------------------");
-    rst_n = 1'b0;
-    #30;
-    rst_n = 1'b1;
-    tlen = 2'b11;   //8bit
-    bclk_mode = 0;  //x16
-    
-    wdata = 8'hea;
-    wr_en = 1;
-
-    parity_en = 1;
-    parity_type = 0;
-
-    $display("Transmitting Byte: %h", wdata);
-    $display("Transmitting Start");
-    @(negedge TXD) wr_en = 0;
-    @(posedge clk);
-    #1;
-    @(rdata);
-    if(rdata == wdata)
-        $display("PASSED: Transmission Completed: %h", rdata);   
-    else
-        $display("==> FAILED | Data Mismatch! Received Data: %h, Expected Data: %h", rdata, wdata);
-
-
-/*
-    $display(" ");
-    $display("-------------------ITEM5:Transfering and Receiving a random character from itself !! (8bit, no parity, x13) ------------------");
-    rst_n = 1'b0;
-    #30;
-    rst_n = 1'b1;
-    @(posedge clk)
-
-    tlen = 2'b11;   //8bit
-    bclk_mode = 1;  //x13
-    wdata = 8'haa;
-    wr_en = 1;
-    $display("Transmitting Byte: %h", wdata);
-    $display("Transmitting Start");
-    @(negedge TXD) wr_en = 0;
-    @(posedge clk);
-    #1;
-    @(rdata);
-    if(rdata == wdata)
-        $display("PASSED: Transmission Completed: %h", rdata);   
-    else
-        $display("==> FAILED | Data Mismatch! Received Data: %h, Expected Data: %h", rdata, wdata);
-*/
-
-end
-endmodule
+endmodule: UART_TOP_tb

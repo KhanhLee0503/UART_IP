@@ -4,115 +4,111 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "TXD",
+					"name" : "O_RDATA[0]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[0]",
+					"name" : "O_RDATA[1]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[1]",
+					"name" : "O_RDATA[2]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[2]",
+					"name" : "O_RDATA[3]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[3]",
+					"name" : "O_RDATA[4]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[4]",
+					"name" : "O_RDATA[5]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[5]",
+					"name" : "O_RDATA[6]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[6]",
+					"name" : "O_RDATA[8]",
 					"strict" : false
 				},
 				{
-					"name" : "rdata[7]",
+					"name" : "O_RDATA[9]",
 					"strict" : false
 				},
 				{
-					"name" : "parity_err",
+					"name" : "O_RDATA[10]",
 					"strict" : false
 				},
 				{
-					"name" : "frame_err",
+					"name" : "O_RDATA[11]",
 					"strict" : false
 				},
 				{
-					"name" : "parity_type",
+					"name" : "O_RDATA[12]",
 					"strict" : false
 				},
 				{
-					"name" : "parity_en",
+					"name" : "O_RDATA[13]",
 					"strict" : false
 				},
 				{
-					"name" : "clk",
+					"name" : "O_RDATA[14]",
 					"strict" : false
 				},
 				{
-					"name" : "rst_n",
+					"name" : "I_CLK",
 					"strict" : false
 				},
 				{
-					"name" : "tlen[0]",
+					"name" : "I_RESET_N",
 					"strict" : false
 				},
 				{
-					"name" : "tlen[1]",
+					"name" : "I_CNT_EN",
 					"strict" : false
 				},
 				{
-					"name" : "RXD",
+					"name" : "I_CNT_LOAD",
 					"strict" : false
 				},
 				{
-					"name" : "bclk_mode",
+					"name" : "I_WDATA[0]",
 					"strict" : false
 				},
 				{
-					"name" : "wdata[0]",
+					"name" : "I_WR_EN",
 					"strict" : false
 				},
 				{
-					"name" : "wr_en",
+					"name" : "I_WDATA[1]",
 					"strict" : false
 				},
 				{
-					"name" : "wdata[7]",
+					"name" : "I_WDATA[2]",
 					"strict" : false
 				},
 				{
-					"name" : "wdata[6]",
+					"name" : "I_WDATA[3]",
 					"strict" : false
 				},
 				{
-					"name" : "wdata[5]",
+					"name" : "I_WDATA[4]",
 					"strict" : false
 				},
 				{
-					"name" : "wdata[4]",
+					"name" : "I_WDATA[5]",
 					"strict" : false
 				},
 				{
-					"name" : "wdata[3]",
+					"name" : "I_WDATA[6]",
 					"strict" : false
 				},
 				{
-					"name" : "wdata[2]",
-					"strict" : false
-				},
-				{
-					"name" : "wdata[1]",
+					"name" : "I_WDATA[7]",
 					"strict" : false
 				}
 			]
