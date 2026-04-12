@@ -11,7 +11,7 @@ This is a personal project designing an UART Module and implementing it on DE-10
 # Block Diagram
 ## TRANS_SHIFT_REG Logic
 <img width="8920" height="5976" alt="image" src="https://github.com/user-attachments/assets/d05b1143-c3a5-4773-a5d2-99b761a3f005" />
-
+<img width="4584" height="4364" alt="image" src="https://github.com/user-attachments/assets/9a11620b-abff-4e81-a7dc-50497f4434ec" />
 
 ## RECEIVER_SHIFT_REG Logic
 <img width="8196" height="3516" alt="image" src="https://github.com/user-attachments/assets/5bd98ad6-2c68-4526-9f6d-d9a0a5aff742" />
