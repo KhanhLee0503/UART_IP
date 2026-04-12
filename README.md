@@ -19,7 +19,8 @@ This is a personal project designing an UART Module and implementing it on DE-10
 <img width="4820" height="3672" alt="image" src="https://github.com/user-attachments/assets/a59f2ab8-d0e2-45c5-8a64-b52ce79fd429" />
 
 ## BAUD_GEN Diagram
-<img width="5508" height="3604" alt="image" src="https://github.com/user-attachments/assets/f7ad09bd-b08e-4837-9f9d-e8d3342460d0" />
+<img width="6092" height="3936" alt="image" src="https://github.com/user-attachments/assets/7a9b3bc6-4f2b-4161-abc9-2aae4b23d69a" />
+
 
 ## FSM Diagram
 
