@@ -20,3 +20,5 @@ This is a personal project designing an UART Module and implementing it on DE-10
 <img width="9000" height="3936" alt="image" src="https://github.com/user-attachments/assets/7a9b3bc6-4f2b-4161-abc9-2aae4b23d69a" />
 
 ## Implement on FPGA (DE-10 Lite)
+https://github.com/user-attachments/assets/f104c2a9-9b0e-42f0-8d22-30870cb2cfda
+
