@@ -2,20 +2,22 @@
 This is a personal project designing an UART Module and implementing it on DE-10 Lite FPGA
 
 # Overview of the Design
-| Name         | Direction | Width | Description                |
-| ----------   | --------- | ----- | --------------         |
-| I_CLK        | Input     |   1   |  UART's Clock source          |
-| I_RESET_N    | Input     |   1   |  Reset signal          |
+## Signal Description
+| Name         | Direction | Width | Description                                                  |
+| ----------   | --------- | ----- | ------------------------------------------------------------ |
+| I_CLK        | Input     |   1   |  UART's Clock source                                         |
+| I_RESET_N    | Input     |   1   |  Reset signal                                                |
 | I_BAUDRATE   | Input     |   4   |  Choose baudrate: 0 = 9600, 1 = 19200, 2 = 38400, 3 = 115200 |
-| I_BCLK_MODE  | Input     |   1   |  Choose sampling mode: 0 = x16, 1 = x13 |
-| I_CNT_EN     | Input     |   1   |  Enable UART operation  |
-| I_CNT_LOAD   | Input     |   1   |  Load divisor  |
-| I_WR_EN      | Input     |   1   |  Write to FIFO enable  |
-| I_RD_EN      | Input     |   1   |  Read from FIFO enable  |
-| I_WDATA      | Input     |   8   |  Write data  |
-| I_RX_IN      | Input     |   1   |  Reception RX  |
-| O_TX_OUT     | Output    |   1   |  Transmission TX  |
-| O_PRDATA     | Output    |   16  |  Read data from FIFO  |
+| I_BCLK_MODE  | Input     |   1   |  Choose sampling mode: 0 = x16, 1 = x13                      |
+| I_CNT_EN     | Input     |   1   |  Enable UART operation                                       |
+| I_CNT_LOAD   | Input     |   1   |  Load divisor                                                |
+| I_WR_EN      | Input     |   1   |  Write to FIFO enable                                        |
+| I_RD_EN      | Input     |   1   |  Read from FIFO enable                                       |
+| I_WDATA      | Input     |   8   |  Write data                                                  |
+| I_RX_IN      | Input     |   1   |  Reception RX                                                |
+| O_TX_OUT     | Output    |   1   |  Transmission TX                                             |
+| O_PRDATA     | Output    |   16  |  Read data from FIFO                                         |
+## IP Operation
 
 
 # Block Diagram
