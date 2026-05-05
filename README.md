@@ -2,8 +2,9 @@
 This is a personal project designing an UART Module and implementing it on DE-10 Lite FPGA
 
 # Overview of the Design
-
-
+| Name       | Direction | Width | Description    |
+| I_CLK      | Input     |  1    |  Clock source  |
+| I_RESET_N  | Input     | 1     |  Reset signal  |
 # Block Diagram
 ## TRANS_SHIFT_REG Logic
 <img width="9000" height="5976" alt="image" src="https://github.com/user-attachments/assets/d05b1143-c3a5-4773-a5d2-99b761a3f005" />
