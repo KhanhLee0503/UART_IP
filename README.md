@@ -24,14 +24,17 @@ This is a personal project designing an UART Module and implementing it on DE-10
 - To start transmission, place the data you want to transmitt on the input I_WDATA and the set I_WR_EN to 1, this will save the data to the transmitting FIFO.
 - The reception can happen at any time while I_CNT_EN = 1. The received data will be stored in receiving FIFO (FWFT).
 
+## Special function
+- There are two special modules will help this UART transmitt or receive 32-bit data instead of 8-bit data, which will reduce the workload of the user.
+  
 # Block Diagram
 ## TRANS_SHIFT_REG Logic
 <img width="9000" height="7000" alt="image" src="https://github.com/user-attachments/assets/c4899efe-dd23-40ea-8b83-91c9ffe17b24" />
-<img width="10000" height="7000" alt="image" src="https://github.com/user-attachments/assets/9a11620b-abff-4e81-a7dc-50497f4434ec" />
+<img width="12000" height="7000" alt="image" src="https://github.com/user-attachments/assets/9a11620b-abff-4e81-a7dc-50497f4434ec" />
 
 ## RECEIVER_SHIFT_REG Logic
 <img width="9000" height="7000" alt="image" src="https://github.com/user-attachments/assets/0dbbf0e8-af64-4c42-ab3e-1b17a223bfbd" />
-<img width="10000" height="7000" alt="image" src="https://github.com/user-attachments/assets/ed482961-060b-4133-91ff-73d4db95eefd" />
+<img width="12000" height="7000" alt="image" src="https://github.com/user-attachments/assets/ed482961-060b-4133-91ff-73d4db95eefd" />
 
 ## Synchronous FIFO Diagram
 <img width="9000" height="7000" alt="image" src="https://github.com/user-attachments/assets/d52d515c-6e4d-4b8c-901d-4884609b1b9f" />
