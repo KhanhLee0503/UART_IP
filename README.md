@@ -30,7 +30,7 @@ This is a personal project designing an UART Module and implementing it on DE-10
 <img width="9000" height="4052" alt="image" src="https://github.com/user-attachments/assets/ed482961-060b-4133-91ff-73d4db95eefd" />
 
 ## Synchronous FIFO Diagram
-<img width="9000" height="4052" alt="image" src="https://github.com/user-attachments/assets/d52d515c-6e4d-4b8c-901d-4884609b1b9f" />
+<img width="9000" height="8000" alt="image" src="https://github.com/user-attachments/assets/d52d515c-6e4d-4b8c-901d-4884609b1b9f" />
 
 ## BAUD_GEN Diagram
 <img width="9000" height="3936" alt="image" src="https://github.com/user-attachments/assets/7a9b3bc6-4f2b-4161-abc9-2aae4b23d69a" />
