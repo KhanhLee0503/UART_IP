@@ -19,10 +19,10 @@ This is a personal project designing an UART Module and implementing it on DE-10
 | O_PRDATA     | Output    |   16  |  Read data from FIFO                                         |
 
 ## Overview
-- This UART design has 4 baudrate selection and 2 sampling modes, which can be configured by the input I_BAUD_RATE and I_BCLK_MODE.
-- To start the UART's operation, set I_CNT_EN to 1.
-- To start transmission, place the data you want to transmitt on the input I_WDATA and the set I_WR_EN to 1, this will save the data to the transmitting FIFO.
-- The reception can happen at any time while I_CNT_EN = 1. The received data will be stored in receiving FIFO (FWFT).
+- This UART design has 4 baudrate selection and 2 sampling modes, which can be configured by the input **I_BAUD_RATE** and **I_BCLK_MODE**.
+- To start the UART's operation, set **I_CNT_EN** to 1.
+- To start transmission, place the data you want to transmitt on the input **I_WDATA** and the set **I_WR_EN** to 1, this will save the data to the transmitting FIFO.
+- The reception can happen at any time while **I_CNT_EN** = 1. The received data will be stored in receiving FIFO (FWFT).
 
 ## Special function
 - There are two special modules will help this UART transmitt or receive 32-bit data instead of 8-bit data, which will reduce the workload of the user.
