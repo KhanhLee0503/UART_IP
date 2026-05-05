@@ -3,6 +3,7 @@ This is a personal project designing an UART Module and implementing it on DE-10
 
 # Overview of the Design
 | Name       | Direction | Width | Description    |
+| ---------- | --------- | ------ | -------------- |
 | I_CLK      | Input     |  1    |  Clock source  |
 | I_RESET_N  | Input     | 1     |  Reset signal  |
 # Block Diagram
