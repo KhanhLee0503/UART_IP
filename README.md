@@ -42,11 +42,11 @@ The bottom part of the diagram illustrates the hidden magic of the RX (Receiver)
 | O_TX_OUT     | Output    |   1   |  Transmission TX                                             |
 | O_PRDATA     | Output    |   16  |  Read data from FIFO                                         |
 
-## Overview
+## Features
 - This UART design has 4 baudrate selection and 2 sampling modes, which can be configured by the input **I_BAUD_RATE** and **I_BCLK_MODE**.
-- To start the UART's operation, set **I_CNT_EN** to 1.
-- To start transmission, place the data you want to transmitt on the input **I_WDATA** and the set **I_WR_EN** to 1, this will save the data to the transmitting FIFO.
-- The reception can happen at any time while **I_CNT_EN** = 1. The received data will be stored in receiving FIFO (FWFT).
+- Parity Error Check mechanism included, to use this feature, enable **I_PARITY_EN** and choose **I_PARITY_TYPE**
+- 2 Transmission and Reception FIFO used for speeding up the transfer process (FWFT).
+- Use APB Protocol to configure the operation of the UART.
 
 ## Special function
 - There are two special modules will help this UART transmitt or receive 32-bit data instead of 8-bit data, which will reduce the workload of the user.
