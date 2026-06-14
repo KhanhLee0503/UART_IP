@@ -4,6 +4,7 @@ This is a personal project designing an UART with Parity Bit Check, Configure by
 # Overview
 ## UART Protocol Frame Data
 <img width="650" height="411" alt="image" src="https://github.com/user-attachments/assets/e4e7dc19-f8d4-495d-95ee-69d11779ada0" />
+
 ### 1. The Data Frame Structure (Top Half)
 The top waveform shows how a single package (frame) of data is transmitted over the physical wire.
 - **Idle State (Before Start):** By default, when no data is being sent, the UART line is held at Logic 1 (HIGH).
