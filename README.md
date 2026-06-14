@@ -26,6 +26,12 @@ The bottom part of the diagram illustrates the hidden magic of the RX (Receiver)
 
 - **Stop Bit Sampling:** Finally, it samples the middle of the Stop bit. If it reads a 1, the frame is valid. If it reads a 0, a Framing Error occurs!
 
+## Features
+- This UART design has 4 baudrate selection and 2 sampling modes, which can be configured by the input **I_BAUD_RATE** and **I_BCLK_MODE**.
+- Parity Error Check mechanism included, to use this feature, enable **I_PARITY_EN** and choose **I_PARITY_TYPE**
+- 2 Transmission and Reception FIFO used for speeding up the transfer process (FWFT).
+- Use APB Protocol to configure the operation of the UART.
+
 ## Signal Description
 | Name         | Direction | Width | Description                                                  |
 | ----------   | --------- | ----- | ------------------------------------------------------------ |
@@ -35,21 +41,17 @@ The bottom part of the diagram illustrates the hidden magic of the RX (Receiver)
 | I_BCLK_MODE  | Input     |   1   |  Choose sampling mode: 0 = x16, 1 = x13                      |
 | I_CNT_EN     | Input     |   1   |  Enable UART operation                                       |
 | I_CNT_LOAD   | Input     |   1   |  Load divisor                                                |
+| I_PARITY_EN  | Input     |   1   |  Enable Parity Error Checking Feature                        |
+| I_PARITY_TYPE| Input     |   1   |  Parity Type (0: Even, 1: Odd)                               |
 | I_WR_EN      | Input     |   1   |  Write to FIFO enable                                        |
 | I_RD_EN      | Input     |   1   |  Read from FIFO enable                                       |
 | I_WDATA      | Input     |   8   |  Write data                                                  |
 | I_RX_IN      | Input     |   1   |  Reception RX                                                |
 | O_TX_OUT     | Output    |   1   |  Transmission TX                                             |
+| O_RX_FULL    | Output    |   1   |  Reception FIFO is full                                      |
+| O_TX_EMPTY   | Output    |   1   |  Transmission FIFO is empty                                  |
+| O_PARITY_ERR | Output    |   1   |  Parity Error in data Transfer                               |
 | O_PRDATA     | Output    |   16  |  Read data from FIFO                                         |
-
-## Features
-- This UART design has 4 baudrate selection and 2 sampling modes, which can be configured by the input **I_BAUD_RATE** and **I_BCLK_MODE**.
-- Parity Error Check mechanism included, to use this feature, enable **I_PARITY_EN** and choose **I_PARITY_TYPE**
-- 2 Transmission and Reception FIFO used for speeding up the transfer process (FWFT).
-- Use APB Protocol to configure the operation of the UART.
-
-## Special function
-- There are two special modules will help this UART transmitt or receive 32-bit data instead of 8-bit data, which will reduce the workload of the user.
   
 # Block Diagram
 ## TRANS_SHIFT_REG Logic
