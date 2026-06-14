@@ -68,8 +68,9 @@ The bottom part of the diagram illustrates the hidden magic of the RX (Receiver)
 
 
 ## RECEIVER_SHIFT_REG Logic
-<img width="9000" height="7000" alt="image" src="https://github.com/user-attachments/assets/0dbbf0e8-af64-4c42-ab3e-1b17a223bfbd" />
-<img width="12000" height="7000" alt="image" src="https://github.com/user-attachments/assets/ed482961-060b-4133-91ff-73d4db95eefd" />
+<img width="10056" height="5976" alt="image" src="https://github.com/user-attachments/assets/0cc7194a-3356-4e74-ae87-dbe1cc506465" />
+<img width="4504" height="5364" alt="image" src="https://github.com/user-attachments/assets/17d34963-9c6f-4e81-8554-ec71eb5764a4" />
+
 
 ## Synchronous FIFO Diagram
 <img width="9000" height="7000" alt="image" src="https://github.com/user-attachments/assets/3adba8b9-d281-4e1e-ba44-8b1df0d4cf36" />
@@ -79,5 +80,11 @@ The bottom part of the diagram illustrates the hidden magic of the RX (Receiver)
 <img width="9000" height="7000" alt="image" src="https://github.com/user-attachments/assets/7a9b3bc6-4f2b-4161-abc9-2aae4b23d69a" />
 
 ## Implement on FPGA (DE-10 Lite)
-https://github.com/user-attachments/assets/f104c2a9-9b0e-42f0-8d22-30870cb2cfda
+- This is the implementation of UART module on DE-10 Lite FPGA kit, communicating with Laptop through Hercules.
+### 1. Write to Laptop
+- Write a random 8 bit number to the Laptop through Hercules.
+### 2. Receive from Laptop
+- Laptop will write 8 bit number for 16 times consecutively through Hercules, we expect the RX FIFO Full Flag will be asserted. Then, we will read 16 hex numbers value that have been received.
+### 3. Parity Check Error
+- We will configure our UART module to be Even parity mode, Laptop will be Odd parity mode. Then Laptop will transmit data to FPGA, we expect parity error flag will be asserted.
 
