@@ -3,14 +3,18 @@ This is a personal project designing an UART with Parity Bit Check, Configure by
 
 # Overview
 ## UART Protocol Frame Data
-<img width="650" height="411" alt="image" src="https://github.com/user-attachments/assets/e4e7dc19-f8d4-495d-95ee-69d11779ada0" />
+<img width="1000" height="500" alt="image" src="https://github.com/user-attachments/assets/e4e7dc19-f8d4-495d-95ee-69d11779ada0" />
 
 ### 1. The Data Frame Structure (Top Half)
 The top waveform shows how a single package (frame) of data is transmitted over the physical wire.
 - **Idle State (Before Start):** By default, when no data is being sent, the UART line is held at Logic 1 (HIGH).
+  
 - **START Bit:** The transmission begins with a High-to-Low transition. The line is pulled to Logic 0 for one bit duration. This sudden drop alerts the receiving module that a new frame is arriving.
+  
 - **Word Data (D0 to D7):** This is the actual payload you want to transmit (usually 8 bits, or 1 byte). In UART, the data is typically sent LSB (Least Significant Bit) first, starting from D0 and ending at D7.
+  
 - **Parity Bit (PB):** As noted in the diagram, this is (optional). An extra bit inserted after the data payload to check for errors (Even or Odd parity).
+  
 - **STOP Bit:** The frame must always conclude with at least one Stop bit, which is always Logic 1 (HIGH). This signals the end of the package and guarantees that the line returns to the idle state, ready for the next Start bit.
 
 ### 2. The Sampling Mechanism (Bottom Half)
