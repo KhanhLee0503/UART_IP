@@ -104,8 +104,8 @@ end
 always_ff@(posedge I_CLK or negedge I_RESET_N) begin
     if (!I_RESET_N)
         O_PARITY_ERR <= '0;
-    else if ((!I_PARITY_EN) | (current_state == IDLE_STATE))
-        O_PARITY_ERR <= '0;
+    //else if ((!I_PARITY_EN) | (current_state == IDLE_STATE))
+     //   O_PARITY_ERR <= '0;
     else begin
         if ((I_PARITY_EN) && (current_state == STOP_STATE) && (baud_cnt_reg == 4'd7) && I_BCLK) begin
             if(I_PARITY_TYPE)
