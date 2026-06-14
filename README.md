@@ -1,7 +1,26 @@
 # UART_IP
-This is a personal project designing an UART Module and implementing it on DE-10 Lite FPGA
+This is a personal project designing an UART with Parity Bit Check, Configure by APB SFR and implementing it on DE-10 Lite FPGA
 
-# Overview of the Design
+# Overview
+## UART Protocol Frame Data
+<img width="650" height="411" alt="image" src="https://github.com/user-attachments/assets/e4e7dc19-f8d4-495d-95ee-69d11779ada0" />
+### 1. The Data Frame Structure (Top Half)
+The top waveform shows how a single package (frame) of data is transmitted over the physical wire.
+- **Idle State (Before Start):** By default, when no data is being sent, the UART line is held at Logic 1 (HIGH).
+- **START Bit:** The transmission begins with a High-to-Low transition. The line is pulled to Logic 0 for one bit duration. This sudden drop alerts the receiving module that a new frame is arriving.
+- **Word Data (D0 to D7):** This is the actual payload you want to transmit (usually 8 bits, or 1 byte). In UART, the data is typically sent LSB (Least Significant Bit) first, starting from D0 and ending at D7.
+- **Parity Bit (PB):** As noted in the diagram, this is (optional). An extra bit inserted after the data payload to check for errors (Even or Odd parity).
+- **STOP Bit:** The frame must always conclude with at least one Stop bit, which is always Logic 1 (HIGH). This signals the end of the package and guarantees that the line returns to the idle state, ready for the next Start bit.
+
+### 2. The Sampling Mechanism (Bottom Half)
+The bottom part of the diagram illustrates the hidden magic of the RX (Receiver) FSM. Since UART is asynchronous (there is no shared clock line between the sender and receiver), the receiver has to figure out exactly when to read the data.
+
+- **Start Detection:** The receiver constantly monitors the line. When it sees the transition from Logic 1 to Logic 0, it triggers its internal counter.
+
+- **Sampling at the Center:** Notice how the sampling pulses (the little spikes) align perfectly with the middle of each data bit. The receiver's baud rate generator calculates the exact width of a bit. Instead of reading the data at the edges (where the signal might be noisy or transitioning), it waits half a bit-period to sample the "bit-pulse center". This ensures the most stable and accurate reading.
+
+- **Stop Bit Sampling:** Finally, it samples the middle of the Stop bit. If it reads a 1, the frame is valid. If it reads a 0, a Framing Error occurs!
+
 ## Signal Description
 | Name         | Direction | Width | Description                                                  |
 | ----------   | --------- | ----- | ------------------------------------------------------------ |
