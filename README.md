@@ -54,6 +54,13 @@ The bottom part of the diagram illustrates the hidden magic of the RX (Receiver)
 | O_PRDATA     | Output    |   16  |  Read data from FIFO                                         |
   
 # Block Diagram
+
+## Architecture
+
+<img width="9492" height="5212" alt="image" src="https://github.com/user-attachments/assets/361f7d49-bffb-4187-91f6-c831944c3682" />
+<img width="6016" height="4012" alt="image" src="https://github.com/user-attachments/assets/08e57248-7da1-4a37-9ac9-facdc9f2487e" />
+
+
 ## TRANS_SHIFT_REG Logic
 
 <img width="1075" height="715" alt="image" src="https://github.com/user-attachments/assets/1d7e9634-6c05-46b1-92a7-df8abf14da2b" />
