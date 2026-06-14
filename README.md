@@ -55,7 +55,8 @@ The bottom part of the diagram illustrates the hidden magic of the RX (Receiver)
   
 # Block Diagram
 ## TRANS_SHIFT_REG Logic
-<img width="9000" height="7000" alt="image" src="https://github.com/user-attachments/assets/c4899efe-dd23-40ea-8b83-91c9ffe17b24" />
+<img width="1075" height="715" alt="image" src="https://github.com/user-attachments/assets/1d7e9634-6c05-46b1-92a7-df8abf14da2b" />
+
 <img width="12000" height="7000" alt="image" src="https://github.com/user-attachments/assets/9a11620b-abff-4e81-a7dc-50497f4434ec" />
 
 ## RECEIVER_SHIFT_REG Logic
